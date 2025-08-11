@@ -18,14 +18,14 @@ if ($id_cita <= 0) {
     exit;
 }
 
-// Obtener datos de la cita
-$stmt = $conn->prepare("SELECT * FROM citas WHERE id_cita = ?");
-$stmt->bind_param("i", $id_cita);
+// Obtener datos de la cita solo si pertenece al usuario logueado
+$stmt = $conn->prepare("SELECT * FROM citas WHERE id_cita = ? AND id_usuario = ?");
+$stmt->bind_param("ii", $id_cita, $_SESSION['id_usuario']);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    echo "Cita no encontrada.";
+    echo "Cita no encontrada o no tienes permiso para verla.";
     exit;
 }
 
