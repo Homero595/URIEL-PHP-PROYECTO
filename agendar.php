@@ -112,7 +112,7 @@ function formatTimeDisplay(hms) {
 function cargarHorariosPara(fecha) {
     let selectHora = document.getElementById('hora_cita');
     selectHora.innerHTML = '<option value="">Cargando...</option>';
-    fetch('horarios_disponibles.php?fecha=' + encodeURIComponent(fecha))
+    fetch('horario_disponibles.php?fecha=' + encodeURIComponent(fecha))
     .then(res => res.json())
     .then(data => {
         // Si el backend manda redirect, hacemos redirección
